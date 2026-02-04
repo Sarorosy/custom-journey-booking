@@ -1,0 +1,574 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #9c1305;
+  --primary-hover: #8e1306;
+  --primary-light: rgba(255, 90, 0, 0.08);
+  --secondary-color: #1e293b;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --bg-color: #f8fafc;
+  --border-color: #e2e8f0;
+  --border-color-new: #898989;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jb-wrapper {
+  max-width: 650px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  color: var(--text-main);
+  border: 1px solid var(--border-color-new);
+}
+
+/* Steps Progress Header */
+.jb-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 40px 60px;
+  border-bottom: 2px solid #f1f5f9;
+  position: relative;
+  z-index: 10;
+}
+
+/* Connecting Line */
+.jb-steps::before {
+  content: "";
+  position: absolute;
+  top: 60px;
+  /* Center of the 40px icon + padding */
+  left: 80px;
+  right: 80px;
+  height: 4px;
+  background: #f1f5f9;
+  z-index: 1;
+}
+
+.jb-steps span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  gap: 12px;
+}
+
+.jb-step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #94a3b8;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 4px #fff;
+}
+
+.jb-step-name {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+  transition: all 0.4s ease;
+}
+
+.jb-steps span.active {
+  color: var(--primary-color);
+  background: transparent;
+}
+
+.jb-steps span.active .jb-step-number {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(156, 19, 5, 0.3);
+}
+
+.jb-steps span.active .jb-step-name {
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+/* Completed State (will be handled by JS adding 'completed' class) */
+.jb-steps span.completed .jb-step-number {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: #fff;
+  animation: jbStepPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes jbStepPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.jb-steps span.completed .jb-step-name {
+  color: #1e293b;
+}
+
+
+/* Step Content Container */
+.jb-step {
+  display: none;
+  padding: 32px;
+  animation: jbFadeIn 0.4s ease-out;
+}
+
+.jb-step.active {
+  display: block;
+}
+
+@keyframes jbFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jb-step h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+}
+
+/* Form Controls */
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--secondary-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+textarea,
+select,
+.vscomp-wrapper {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border: 1px solid var(--border-color-new) !important;
+  border-radius: var(--radius-md) !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
+  color: var(--text-main) !important;
+  background: #fff !important;
+  transition: var(--transition) !important;
+  margin: 0 0 24px 0 !important;
+  box-sizing: border-box !important;
+}
+
+input[type="tel"] {
+  height: 52px !important;
+  border: 1px solid var(--border-color-new) !important;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0 !important;
+  border-left: none !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
+  color: var(--text-main) !important;
+  background: #fff !important;
+  transition: var(--transition) !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  padding: 12px 16px !important;
+  flex: 1 !important;
+}
+
+.iti {
+  display: flex !important;
+  position: relative !important;
+  width: 100% !important;
+  margin: 0 0 24px 0 !important;
+}
+
+.iti__flag-container {
+  position: static !important;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+  background-color: #f1f5f9 !important;
+  border: 1px solid var(--border-color-new) !important;
+  border-right: none !important;
+  border-top-left-radius: var(--radius-md) !important;
+  border-bottom-left-radius: var(--radius-md) !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 52px !important;
+  position: static !important;
+}
+
+.iti__selected-dial-code {
+  font-weight: 600 !important;
+  color: var(--secondary-color) !important;
+  margin-left: 8px !important;
+}
+
+.iti__country-list {
+  z-index: 9999 !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: 1px solid var(--border-color-new) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.vscomp-wrapper.focus {
+  border-color: var(--primary-color) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 4px var(--primary-light) !important;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Journey Type as Card Selectors */
+.jb-radio {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.jb-radio label {
+  flex: 1;
+  margin: 0;
+  padding: 16px;
+  border: 2px solid var(--border-color-new);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: #fff;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.jb-radio label::before {
+  font-size: 24px;
+}
+
+.jb-radio label:has(input[value="single"])::before {
+  content: "🚗";
+}
+
+.jb-radio label:has(input[value="round"])::before {
+  content: "🔄";
+}
+
+.jb-radio label:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.jb-radio label:has(input:checked) {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.jb-radio input {
+  display: none;
+}
+
+
+/* Vehicle Selection Cards */
+.jb-vehicle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0 32px 0;
+}
+
+.jb-vehicle label {
+  border: 2px solid var(--border-color-new);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 0;
+  background: #fff;
+  text-align: center;
+}
+
+.jb-vehicle label:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.jb-vehicle label:has(input:checked) {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+  box-shadow: 0 10px 25px -5px rgba(255, 90, 0, 0.15);
+}
+
+.jb-vehicle input {
+  display: none;
+}
+
+.jb-vehicle img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.jb-vehicle span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.jb-vehicle .car-price,
+.jb-vehicle .van-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--secondary-color);
+  display: block;
+  margin-top: 4px;
+}
+
+
+/* Navigation Buttons */
+.jb-step::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.jb-next,
+.jb-submit,
+.jb-back {
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.jb-next,
+.jb-submit {
+  background: var(--primary-color);
+  color: #fff;
+  float: right;
+  min-width: 140px;
+}
+
+.jb-next:hover,
+.jb-submit:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 20px rgba(255, 90, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+.jb-back {
+  background: #f1f5f9;
+  color: var(--text-muted);
+  float: left;
+}
+
+.jb-back:hover {
+  background: #e2e8f0;
+  color: var(--secondary-color);
+}
+
+/* Virtual Select Library Overrides */
+.vscomp-toggle-button {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: auto !important;
+  box-shadow: none !important;
+}
+
+.vscomp-value {
+  color: var(--text-main) !important;
+  font-weight: 500 !important;
+}
+
+.vscomp-dropbox {
+  border: 1px solid var(--border-color-new) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Checkbox & Options Styling */
+.jb-checkbox {
+  margin-bottom: 24px;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-new);
+}
+
+.jb-checkbox label {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  margin: 0 !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.jb-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+#luggage_wrapper,
+#baby_wrapper {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border-color);
+}
+
+/* Agreement Checkbox */
+.jb-step:last-child label:last-of-type {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.jb-step:last-child label:last-of-type input {
+  margin-top: 3px;
+  accent-color: var(--primary-color);
+}
+
+#jb_step_number {
+  display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .jb-wrapper {
+    margin: 10px;
+    border-radius: var(--radius-lg);
+  }
+
+  .jb-steps {
+    padding: 24px 16px;
+  }
+
+  .jb-steps::before {
+    top: 42px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+  }
+
+  .jb-steps span {
+    gap: 8px;
+  }
+
+  .jb-step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    border-width: 3px;
+  }
+
+  .jb-steps span .jb-step-name {
+    display: none;
+  }
+
+  .jb-steps span.active {
+    flex: 2;
+  }
+
+  .jb-steps span.active .jb-step-name {
+    display: block;
+    font-size: 9px;
+    position: absolute;
+    top: 42px;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .jb-vehicle {
+    grid-template-columns: 1fr;
+  }
+
+  .jb-next,
+  .jb-submit,
+  .jb-back {
+    width: 100%;
+    float: none;
+    margin-bottom: 12px;
+  }
+}
