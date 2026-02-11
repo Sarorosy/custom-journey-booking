@@ -126,6 +126,7 @@ $destinationMappings = $this->get_destination_mappings();
       }
 
       .jb-vehicle .car-price, 
+      .jb-vehicle .economy-van-price,
       .jb-vehicle .van-price {
         color: #9c1305;
         font-weight: 800;
@@ -302,6 +303,50 @@ $destinationMappings = $this->get_destination_mappings();
       .jb-submit[disabled] {
         opacity: 0.6;
         cursor: not-allowed;
+      }
+
+      /* Phone Input (iti) Flex Layout */
+      .iti {
+        display: flex !important;
+        width: 100% !important;
+        margin-bottom: 0 !important;
+      }
+
+      .iti__flag-container {
+        position: static !important;
+      }
+
+      .iti__selected-flag {
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 12px !important;
+        background: #f1f5f9 !important;
+        border: 1px solid var(--border-color-new) !important;
+        border-right: none !important;
+        border-radius: 12px 0 0 12px !important;
+        height: 52px !important;
+      }
+
+      .iti__selected-dial-code {
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        margin-left: 8px !important;
+      }
+
+      input[type="tel"] {
+        flex: 1 !important;
+        height: 52px !important;
+        border: 1px solid var(--border-color-new) !important;
+        border-left: none !important;
+        border-radius: 0 12px 12px 0 !important;
+        padding: 12px 16px !important;
+        font-size: 15px !important;
+        margin-bottom: 0 !important;
+      }
+
+      .iti__country-list {
+        z-index: 1000 !important;
+        width: 300px !important;
       }
 
     </style>
@@ -633,8 +678,12 @@ $destinationMappings = $this->get_destination_mappings();
         </div>
       </div>
 
-      <label>Phone Number</label>
-      <input type="tel" name="phone" id="phone" required>
+      <div class="jb-input-row">
+        <div class="col">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" id="phone" required>
+        </div>
+      </div>
 
       <div class="jb-agreement">  
         <label>
